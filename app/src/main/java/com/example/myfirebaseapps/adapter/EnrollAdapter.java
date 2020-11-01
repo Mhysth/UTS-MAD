@@ -65,7 +65,7 @@ public class EnrollAdapter extends RecyclerView.Adapter<EnrollAdapter.CardViewVi
             @Override
             public void onClick(View v) {
                 Collide(course);
-                Toast.makeText(context, "Course Added", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Adding Course...", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -124,7 +124,7 @@ public class EnrollAdapter extends RecyclerView.Adapter<EnrollAdapter.CardViewVi
                     }
                 }
                 if (parallel == true) {
-                    Toast.makeText(context, "Schedule time collided with your current schedule(s)!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Add Failed! Schedule time collided with your current schedule(s)!", Toast.LENGTH_SHORT).show();
                 } else {
                     addCourse.setValue(course_temp);
                 }
