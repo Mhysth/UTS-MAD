@@ -24,7 +24,7 @@ public class Login extends AppCompatActivity implements TextWatcher {
 
     Toolbar bar;
     TextInputLayout iemail, ipass;
-    String email, pass;
+    String e, p;
     Button btn;
     FirebaseAuth mAuth;
 
@@ -46,6 +46,8 @@ public class Login extends AppCompatActivity implements TextWatcher {
         iemail.getEditText().addTextChangedListener(this);
         ipass.getEditText().addTextChangedListener(this);
 
+        btn.setEnabled(false);
+
         bar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,19 +59,18 @@ public class Login extends AppCompatActivity implements TextWatcher {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if (TextUtils.isEmpty(email) || TextUtils.isEmpty(pass)) {
+                if(TextUtils.isEmpty(e) && TextUtils.isEmpty(p)){
                     Toast.makeText(Login.this, "All field are required!", Toast.LENGTH_SHORT).show();
-                } else {
-                    mAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                }else{
+                    mAuth.signInWithEmailAndPassword(e, p).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
+                            if (task.isSuccessful()){
                                 Intent intent = new Intent(Login.this, StudentArea.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
                                 finish();
-                            } else {
+                            }else{
                                 Toast.makeText(Login.this, "Authentication Failed!", Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -81,29 +82,17 @@ public class Login extends AppCompatActivity implements TextWatcher {
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
     }
-    void getFormValue (){
-        email = iemail.getEditText().getText().toString().trim();
-        pass = ipass.getEditText().getText().toString().trim();
-    }
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
-        if (email.isEmpty() && pass.isEmpty()) {
-            getFormValue();
+        e = iemail.getEditText().getText().toString().trim();
+        p = ipass.getEditText().getText().toString().trim();
+        if(e.isEmpty() && p.isEmpty()){
             btn.setEnabled(false);
-        } else {
+        }else{
             btn.setEnabled(true);
         }
     }
     @Override
     public void afterTextChanged(Editable s) {
-    }
-    @Override
-    public void onBackPressed() {
-        Intent intent;
-        intent = new Intent(Login.this, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(Login.this);
-        startActivity(intent, options.toBundle());
-        finish();
     }
 }
