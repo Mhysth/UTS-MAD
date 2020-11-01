@@ -87,7 +87,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CardViewVi
                                             }
                                         });
                                     }
-                                }, 2000);
+                                }, 1000);
                             }
                         })
                         .setNegativeButton("No", new DialogInterface.OnClickListener() {

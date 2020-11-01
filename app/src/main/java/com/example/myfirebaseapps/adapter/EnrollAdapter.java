@@ -31,21 +31,26 @@ public class EnrollAdapter extends RecyclerView.Adapter<EnrollAdapter.CardViewVi
     private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
     private ArrayList<Course> listCourse;
     boolean parallel = false;
+
     public ArrayList<Course> getListCourse() {
         return listCourse;
     }
+
     public void setListCourse(ArrayList<Course> listCourse) {
         this.listCourse = listCourse;
     }
+
     public EnrollAdapter(final Context context) {
         this.context = context;
     }
+
     @NonNull
     @Override
     public EnrollAdapter.CardViewViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.enroll_adapter, parent, false);
         return new EnrollAdapter.CardViewViewHolder(view);
     }
+
     @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(@NonNull EnrollAdapter.CardViewViewHolder holder, int position) {
@@ -68,9 +73,11 @@ public class EnrollAdapter extends RecyclerView.Adapter<EnrollAdapter.CardViewVi
     public int getItemCount() {
         return getListCourse().size();
     }
+
     public class CardViewViewHolder extends RecyclerView.ViewHolder {
         TextView enrollc, enrolll, enrolld, enrollts, enrollte;
         Button btn;
+
         public CardViewViewHolder(View itemView) {
             super(itemView);
             enrollc = itemView.findViewById(R.id.rollcourse);
@@ -106,10 +113,13 @@ public class EnrollAdapter extends RecyclerView.Adapter<EnrollAdapter.CardViewVi
                     if (course_day.equalsIgnoreCase(course_temp_day)) {
 //                        cek waktu start sama
                         if (course_temp_time >= course_time && course_temp_time <= course_time_end) {
+                            parallel = true;
+                            break;
+                        }
 //                            cek waktu end sama
-                            if (course_temp_time_end >= course_time && course_temp_time_end <= course_time_end) {
-                                parallel = true;
-                            }
+                        if (course_temp_time_end >= course_time && course_temp_time_end <= course_time_end) {
+                            parallel = true;
+                            break;
                         }
                     }
                 }
