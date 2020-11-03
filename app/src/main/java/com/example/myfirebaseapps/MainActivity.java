@@ -21,30 +21,25 @@ public class MainActivity extends AppCompatActivity {
         c = findViewById(R.id.bttn_c);
         r = findViewById(R.id.bttn_r);
         l = findViewById(R.id.bttn_l);
-
     }
-
     public void button_lecturer_clicked(View view) {
         Intent intent = new Intent(MainActivity.this, AddLecturer.class);
         intent.putExtra("action", "add");
         startActivity(intent);
         finish();
     }
-
     public void button_course_clicked(View view) {
         Intent intent = new Intent(MainActivity.this, AddCourse.class);
         intent.putExtra("action", "add");
         startActivity(intent);
         finish();
     }
-
     public void button_student_clicked(View view) {
         Intent intent = new Intent(MainActivity.this, AddStudent.class);
         intent.putExtra("action", "add");
         startActivity(intent);
         finish();
     }
-
     public void button_login_clicked(View view) {
         Intent intent = new Intent(MainActivity.this, Login.class);
         startActivity(intent);
