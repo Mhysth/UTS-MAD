@@ -45,7 +45,6 @@ public class AddCourse extends AppCompatActivity implements TextWatcher {
     private DatabaseReference mDatabase;
     Course course;
     ArrayAdapter<CharSequence> ender;
-
     List<String> lecturer_list;
 
     @Override
